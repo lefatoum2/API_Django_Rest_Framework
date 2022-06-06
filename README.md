@@ -89,3 +89,27 @@ class DeleteArticle(generics.DestroyAPIView):
     queryset = Article.objects.all()
     serializer_class = ArticleSerializer
 ```
+
+## URLS
+
+main/urls.py :
+
+```py
+from django.urls import path
+from .views import *
+
+
+urlpatterns = [
+    path('<int:pk>/', DetailArticle.as_view()),
+    path('', ListArticle.as_view()),
+    path('create', CreateArticle.as_view()),
+    path('delete/<int:pk>', DeleteArticle.as_view())
+]
+
+```
+
+### Lancement
+
+```
+py manage.py runserver
+```
