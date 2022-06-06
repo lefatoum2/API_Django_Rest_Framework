@@ -38,6 +38,8 @@ INSTALLED_APPS = [
 
 ## Model
 
+models.py :
+
 ```py
 from django.db import models
 # Create your models here.
@@ -48,4 +50,42 @@ class Todo(models.Model):
     Completed = models.BooleanField(default=False)
 def __str__(self):
         return self.Title
+```
+
+serializers.py :
+
+```py
+from rest_framework import serializers
+from .models import Article
+
+class ArticleSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Todo
+        fields = ('id', 'Title', 'Description', 'Date')
+```
+
+```
+python manage.py makemigrations
+python manage.py migrate
+```
+## Les vues
+views.py : 
+
+```py
+from rest_framework import generics
+from .serializers import *
+from .models import *
+
+class ListArticle(generics.ListAPIView):
+    queryset = Article.objects.all()
+    serializer_class = ArticleSerializer
+class DetailArticle(generics.RetrieveUpdateAPIView):
+    queryset = Article.objects.all()
+    serializer_class = ArticleSerializer
+class CreateArticle(generics.CreateAPIView):
+    queryset = Article.objects.all()
+    serializer_class = ArticleSerializer
+class DeleteArticle(generics.DestroyAPIView):
+    queryset = Article.objects.all()
+    serializer_class = ArticleSerializer
 ```
