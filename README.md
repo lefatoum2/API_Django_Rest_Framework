@@ -1,3 +1,7 @@
+# API avec DJANGO REST FRAMEWORK
+
+![img6](./img/rest.jpg)]
+
 
 ## Environnement virtual
 
