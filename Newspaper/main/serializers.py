@@ -3,5 +3,5 @@ from .models import Article
 
 class ArticleSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Todo
+        model = Article
         fields = ('id', 'Title', 'Description', 'Date')
